@@ -1,0 +1,152 @@
+import { Package, ProductKey } from "./types";
+
+export const CLEAR_CONTRACTS_PACKAGES: Package[] = [
+  {
+    tier: 'community',
+    name: 'Community',
+    description: 'Perfect for small teams getting started with contract management',
+    price: 'Free',
+    features: [
+      { id: '1', name: 'Up to 5 users', included: true },
+      { id: '2', name: 'Basic contract search', included: true },
+      { id: '3', name: 'Standard reporting', included: true },
+      { id: '4', name: 'Email support', included: true },
+      { id: '5', name: 'Advanced analytics', included: false },
+      { id: '6', name: 'API access', included: false },
+      { id: '7', name: 'Custom integrations', included: false },
+      { id: '8', name: 'Dedicated support', included: false },
+      { id: '9', name: 'SSO/SAML', included: false },
+    ],
+    limits: {
+      users: 5,
+      dataExport: 1000,
+      apiCalls: 0,
+      storage: '5 GB',
+    },
+  },
+  {
+    tier: 'pro',
+    name: 'Pro',
+    description: 'Advanced features for growing organizations',
+    price: '$499',
+    billingPeriod: 'per month',
+    popular: true,
+    features: [
+      { id: '1', name: 'Up to 50 users', included: true },
+      { id: '2', name: 'Advanced contract search', included: true },
+      { id: '3', name: 'Custom reporting & dashboards', included: true },
+      { id: '4', name: 'Priority email & chat support', included: true },
+      { id: '5', name: 'Advanced analytics', included: true },
+      { id: '6', name: 'API access (10k calls/month)', included: true },
+      { id: '7', name: 'Standard integrations', included: true },
+      { id: '8', name: 'Custom integrations', included: false },
+      { id: '9', name: 'SSO/SAML', included: false },
+    ],
+    limits: {
+      users: 50,
+      dataExport: 50000,
+      apiCalls: 10000,
+      storage: '100 GB',
+    },
+  },
+  {
+    tier: 'enterprise',
+    name: 'Enterprise',
+    description: 'Complete solution for large healthcare organizations',
+    price: 'Contact Sales',
+    features: [
+      { id: '1', name: 'Unlimited users', included: true },
+      { id: '2', name: 'AI-powered contract search', included: true },
+      { id: '3', name: 'Fully customizable reporting', included: true },
+      { id: '4', name: 'Dedicated support team', included: true },
+      { id: '5', name: 'Advanced analytics & forecasting', included: true },
+      { id: '6', name: 'Unlimited API access', included: true },
+      { id: '7', name: 'Custom integrations', included: true },
+      { id: '8', name: 'White-label options', included: true },
+      { id: '9', name: 'SSO/SAML & advanced security', included: true },
+    ],
+    limits: {
+      users: 'unlimited',
+      dataExport: 'unlimited',
+      apiCalls: 'unlimited',
+      storage: 'Unlimited',
+    },
+  },
+];
+
+export const ANALYZE_PACKAGES: Package[] = [
+  {
+    tier: 'community',
+    name: 'Community',
+    description: 'Essential analytics for small healthcare teams',
+    price: 'Free',
+    features: [
+      { id: '1', name: 'Up to 3 users', included: true },
+      { id: '2', name: 'Basic data visualization', included: true },
+      { id: '3', name: 'Standard templates', included: true },
+      { id: '4', name: 'Email support', included: true },
+      { id: '5', name: 'Custom data models', included: false },
+      { id: '6', name: 'Advanced forecasting', included: false },
+      { id: '7', name: 'API access', included: false },
+      { id: '8', name: 'Data export', included: false },
+    ],
+    limits: {
+      users: 3,
+      dataExport: 0,
+      apiCalls: 0,
+      storage: '2 GB',
+    },
+  },
+  {
+    tier: 'pro',
+    name: 'Pro',
+    description: 'Powerful analytics for data-driven healthcare teams',
+    price: '$799',
+    billingPeriod: 'per month',
+    popular: true,
+    features: [
+      { id: '1', name: 'Up to 25 users', included: true },
+      { id: '2', name: 'Advanced data visualization', included: true },
+      { id: '3', name: 'Custom templates & dashboards', included: true },
+      { id: '4', name: 'Priority support', included: true },
+      { id: '5', name: 'Custom data models', included: true },
+      { id: '6', name: 'Basic forecasting', included: true },
+      { id: '7', name: 'API access (5k calls/month)', included: true },
+      { id: '8', name: 'Data export (50k records)', included: true },
+    ],
+    limits: {
+      users: 25,
+      dataExport: 50000,
+      apiCalls: 5000,
+      storage: '50 GB',
+    },
+  },
+  {
+    tier: 'enterprise',
+    name: 'Enterprise',
+    description: 'Enterprise-grade analytics with unlimited potential',
+    price: 'Contact Sales',
+    features: [
+      { id: '1', name: 'Unlimited users', included: true },
+      { id: '2', name: 'AI-powered visualization', included: true },
+      { id: '3', name: 'Fully customizable platform', included: true },
+      { id: '4', name: 'Dedicated analytics team', included: true },
+      { id: '5', name: 'Advanced custom data models', included: true },
+      { id: '6', name: 'Predictive analytics & ML', included: true },
+      { id: '7', name: 'Unlimited API access', included: true },
+      { id: '8', name: 'Unlimited data export', included: true },
+    ],
+    limits: {
+      users: 'unlimited',
+      dataExport: 'unlimited',
+      apiCalls: 'unlimited',
+      storage: 'Unlimited',
+    },
+  },
+];
+
+export const PRODUCT_PACKAGES: Record<ProductKey, Package[]> = {
+  'clear-contracts': CLEAR_CONTRACTS_PACKAGES,
+  'analyze': ANALYZE_PACKAGES,
+};
+
