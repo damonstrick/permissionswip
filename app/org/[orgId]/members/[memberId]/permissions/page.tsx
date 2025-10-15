@@ -209,17 +209,19 @@ export default function MemberPermissionsPage() {
       </Card>
 
       {/* Permissions by Platform */}
-      {Object.entries(permissionsByPlatform).map(([platform, permissions]) => (
+      {Object.entries(permissionsByPlatform).map(([platform, permissions]) => {
+        const permList = permissions as any[]
+        return (
         <Card key={platform}>
           <CardHeader>
             <CardTitle>{platform} Permissions</CardTitle>
             <p className="text-sm text-neutral-500">
-              {permissions.length} total permissions for {platform}
+              {permList.length} total permissions for {platform}
             </p>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {permissions.map((permission, index) => (
+              {permList.map((permission, index) => (
                 <div
                   key={`${permission.id}-${index}`}
                   className={`border rounded-lg p-4 ${
@@ -261,7 +263,8 @@ export default function MemberPermissionsPage() {
             </div>
           </CardContent>
         </Card>
-      ))}
+        )
+      })}
 
       {/* Group Memberships */}
       <Card>
