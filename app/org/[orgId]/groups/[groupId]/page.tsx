@@ -223,14 +223,15 @@ export default function GroupDetailPage() {
                   {clearContractsConfig.permissions.permissions.map((permission) => (
                     <Chip
                       key={permission.id}
-                      label={`${permission.action} - ${permission.item}`}
                       onRemove={() => {
                         updatePermissions(
                           'clear-contracts',
                           clearContractsConfig.permissions.permissions.filter(p => p.id !== permission.id)
                         )
                       }}
-                    />
+                    >
+                      {`${permission.action} - ${permission.item}`}
+                    </Chip>
                   ))}
                 </div>
               </div>
@@ -332,14 +333,15 @@ export default function GroupDetailPage() {
                   {analyzeConfig.permissions.permissions.map((permission) => (
                     <Chip
                       key={permission.id}
-                      label={`${permission.action} - ${permission.item}`}
                       onRemove={() => {
                         updatePermissions(
                           'analyze',
                           analyzeConfig.permissions.permissions.filter(p => p.id !== permission.id)
                         )
                       }}
-                    />
+                    >
+                      {`${permission.action} - ${permission.item}`}
+                    </Chip>
                   ))}
                 </div>
               </div>
