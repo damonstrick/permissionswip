@@ -145,7 +145,7 @@ export const ANALYZE_PACKAGES: Package[] = [
   },
 ];
 
-export const PRODUCT_PACKAGES: Record<ProductKey, Package[]> = {
+export const PRODUCT_PACKAGES: Partial<Record<ProductKey, Package[]>> = {
   'clear-contracts': CLEAR_CONTRACTS_PACKAGES,
   'analyze': ANALYZE_PACKAGES,
 };
