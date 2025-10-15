@@ -377,8 +377,9 @@ export default function ProductUsersPage() {
                     </td>
                     <td className="p-4">
                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        user.role === 'admin' ? 'bg-red-100 text-red-700' :
-                        user.role === 'user' ? 'bg-blue-100 text-blue-700' :
+                        user.role === 'Admin' ? 'bg-red-100 text-red-700' :
+                        user.role === 'Negotiator' ? 'bg-blue-100 text-blue-700' :
+                        user.role === 'Analyst' ? 'bg-green-100 text-green-700' :
                         'bg-gray-100 text-gray-700'
                       }`}>
                         {user.role}
