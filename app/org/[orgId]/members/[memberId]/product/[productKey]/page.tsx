@@ -23,14 +23,14 @@ export default function ProductPermissionPage() {
   const { getConfiguration, updateScope, updateCrosswalks, updatePermissions, updatePreferences } = useProductStore()
   const productKey = params.productKey as string
   
+  const [permissionSearch, setPermissionSearch] = useState("")
+  const [activeTab, setActiveTab] = useState<'features' | 'preferences'>('preferences')
+  
   const productConfig = getConfiguration(productKey)
 
   if (!productConfig) {
     return <div>Product not found</div>
   }
-
-  const [permissionSearch, setPermissionSearch] = useState("")
-  const [activeTab, setActiveTab] = useState<'features' | 'preferences'>('preferences')
 
   const breadcrumbItems = [
     { label: "Members", href: `/org/${member.orgId}/members` },
