@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useOrgStore } from "@/store/orgStore"
 import { ALL_PRODUCTS } from "@/data/mocks"
+import { ProductKey } from "@/data/types"
 
 interface CreateGroupModalProps {
   open: boolean
@@ -24,7 +25,7 @@ export function CreateGroupModal({ open, onOpenChange }: CreateGroupModalProps) 
 
   const handleSubmit = () => {
     if (!canSubmit) return
-    createGroup({ name, description, roleLevel, products: [productKey] })
+    createGroup({ name, description, roleLevel, products: [productKey as ProductKey] })
     onOpenChange(false)
     setName("")
     setDescription("")
