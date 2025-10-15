@@ -5,6 +5,7 @@ import { MessageSquare, X, Send, Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
+import { supabase } from '@/lib/supabase'
 
 interface Comment {
   id: string
@@ -27,22 +28,28 @@ export function CommentSystem() {
   // Get current page URL for filtering comments
   const currentPage = typeof window !== 'undefined' ? window.location.pathname : ''
 
-  // Load comments from localStorage
+  // Load comments from Supabase
   useEffect(() => {
-    const stored = localStorage.getItem('design-comments')
-    if (stored) {
-      setComments(JSON.parse(stored))
-    }
+    loadComments()
+    
+    // Load author from localStorage
     const storedAuthor = localStorage.getItem('comment-author')
     if (storedAuthor) {
       setAuthor(storedAuthor)
     }
-  }, [])
 
-  // Save comments to localStorage
-  useEffect(() => {
-    localStorage.setItem('design-comments', JSON.stringify(comments))
-  }, [comments])
+    // Subscribe to real-time updates
+    const channel = supabase
+      .channel('comments')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'comments' }, () => {
+        loadComments()
+      })
+      .subscribe()
+
+    return () => {
+      supabase.removeChannel(channel)
+    }
+  }, [])
 
   // Save author to localStorage
   useEffect(() => {
@@ -50,6 +57,17 @@ export function CommentSystem() {
       localStorage.setItem('comment-author', author)
     }
   }, [author])
+
+  const loadComments = async () => {
+    const { data, error } = await supabase
+      .from('comments')
+      .select('*')
+      .order('timestamp', { ascending: true })
+    
+    if (data && !error) {
+      setComments(data)
+    }
+  }
 
   // Handle click to add comment
   const handleClick = (e: React.MouseEvent) => {
@@ -62,11 +80,10 @@ export function CommentSystem() {
     setNewCommentPosition({ x, y })
   }
 
-  const addComment = () => {
+  const addComment = async () => {
     if (!newCommentPosition || !author.trim() || !commentText.trim()) return
 
-    const newComment: Comment = {
-      id: Date.now().toString(),
+    const newComment = {
       x: newCommentPosition.x,
       y: newCommentPosition.y,
       author: author.trim(),
@@ -75,13 +92,14 @@ export function CommentSystem() {
       page: currentPage,
     }
 
-    setComments([...comments, newComment])
+    await supabase.from('comments').insert([newComment])
+    
     setNewCommentPosition(null)
     setCommentText('')
   }
 
-  const deleteComment = (id: string) => {
-    setComments(comments.filter(c => c.id !== id))
+  const deleteComment = async (id: string) => {
+    await supabase.from('comments').delete().eq('id', id)
     setActiveComment(null)
   }
 
